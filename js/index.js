@@ -73,3 +73,53 @@ for (let key in luxuryCar) {
 for (let [key, value] in Object.entries(luxuryCar)) {
   console.log(key, value);
 }
+
+//Object constructor
+function Animal(species) {
+  this.species = species;
+  this.eats = true;
+}
+
+Animal.prototype.walks = function () {
+  return `A ${this.species} is walking`;
+};
+
+const Bear = new Animal('bear');
+
+console.log(Bear.species);
+console.log(Bear.walks());
+
+//The prototype property is where inheritable props adn methods are
+console.log(Bear.__proto__);
+console.log(Bear.__proto__ === Animal.prototype);
+console.log(Animal.prototype);
+console.log(Bear);
+
+//Now an ES6 Classes of Inheritance
+class Vehicle {
+  constructor() {
+    (this.wheels = 4), (this.motorized = true);
+  }
+  ready() {
+    return 'Ready to go!';
+  }
+}
+
+class Motorcycle extends Vehicle {
+  constructor() {
+    super();
+    this.wheels = 2;
+  }
+  wheelie() {
+    return 'On one wheel now!';
+  }
+}
+
+const myBike = new Motorcycle();
+console.log(myBike);
+console.log(myBike.wheels);
+console.log(myBike.ready());
+console.log(myBike.wheelie());
+
+const myTruck = new Vehicle();
+console.log(myTruck);
