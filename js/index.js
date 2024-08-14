@@ -33,3 +33,43 @@ console.log(guitarist.alive);
 console.log(guitarist.plays);
 console.log(guitarist.strings);
 console.log(guitarist);
+
+//No circular references allowed (person.__proto__ can't be guitarist)
+//The __proto__ value must be an object or null.
+//An object can only directly inherit from one object
+
+//object with getter and setter methods
+const car = {
+  doors: 2,
+  seats: 'vinyl',
+  get seatMaterial() {
+    return this.seats;
+  },
+  set seatMaterial(material) {
+    this.seats = material;
+  },
+};
+
+const luxuryCar = {};
+Object.setPrototypeOf(luxuryCar, car);
+luxuryCar.seatMaterial = 'leather'; //Note keyword "this"
+console.log(luxuryCar);
+console.log(luxuryCar.doors);
+console.log(car);
+
+//Getting the keys of an object
+console.log(Object.keys(luxuryCar));
+//loop through each object key
+Object.keys(luxuryCar).forEach((key) => {
+  console.log(key);
+});
+for (let key of Object.entries(luxuryCar)) {
+  console.log(key);
+}
+//But for..in loop includes inherited props
+for (let key in luxuryCar) {
+  console.log(key);
+}
+for (let [key, value] in Object.entries(luxuryCar)) {
+  console.log(key, value);
+}
